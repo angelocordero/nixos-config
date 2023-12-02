@@ -159,6 +159,7 @@
       vscodium-fhs
       playerctl
       btop
+      pulsemixer
     ];
   };
 

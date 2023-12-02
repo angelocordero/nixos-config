@@ -75,6 +75,11 @@
       }
     }
 
+    windowrulev2 = float, title:(volctrl)
+    windowrulev2 = pin, title:(volctrl)
+    windowrulev2 = size 900 400, title:(volctrl)
+    windowrulev2 = move 65 650, title:(volctrl)
+
     bind = SUPER, RETURN, exec, alacritty
     bind = SUPER, D, exec, wofi --show drun
 
@@ -149,6 +154,7 @@
     (import ./scripts/my-screenshot-region.nix { inherit pkgs; })
     (import ./scripts/my-screenshot-region-edit.nix { inherit pkgs; })
     (import ./scripts/hyprland-scripts.nix { inherit pkgs; })
+    (import ./scripts/volctrl.nix { inherit pkgs; })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

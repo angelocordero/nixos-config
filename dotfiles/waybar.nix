@@ -47,6 +47,7 @@
 	  scroll-step = 3.0;
 	  tooltip = false;
 	  on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+	  on-click = "volctrl";
 	};
 
 	"clock" = {

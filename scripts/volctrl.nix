@@ -6,11 +6,11 @@ pkgs.writeShellApplication {
   runtimeInputs = with pkgs; [ hyprland procps alacritty pulsemixer jq ];
 
   text = ''
-    clients =$(hyprctl clients -j)
+    clients=$(hyprctl clients -j)
 
-    if grep -q '"title": "volctrl"' <<< "$json_data"; then
-      volctrl_id=$(jq -r '.[] | select(.title == "volctrl") | .id' <<< "$json_data")
-      kill $volctrl_id
+    if grep -q '"title": "volctrl"' <<< "$clients"; then
+      volctrl_id=$(echo "$clients" | jq -r '.[] | select(.title == "volctrl").pid')
+      kill "$volctrl_id"
     else
       alacritty -T volctrl -e pulsemixer
     fi

@@ -160,6 +160,7 @@
       playerctl
       btop
       pulsemixer
+      mangohud
     ];
   };
 

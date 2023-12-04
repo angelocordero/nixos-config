@@ -3,7 +3,7 @@
 pkgs.writeShellApplication {
   name = "volctrl";
 
-  runtimeInputs = with pkgs; [ hyprland procps alacritty pulsemixer jq ];
+  runtimeInputs = with pkgs; [ hyprland procps kitty pulsemixer jq ];
 
   text = ''
     clients=$(hyprctl clients -j)
@@ -12,7 +12,7 @@ pkgs.writeShellApplication {
       volctrl_id=$(echo "$clients" | jq -r '.[] | select(.title == "volctrl").pid')
       kill "$volctrl_id"
     else
-      alacritty -T volctrl -e pulsemixer
+      kitty -T volctrl -e pulsemixer
     fi
   '';
 }

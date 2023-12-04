@@ -1,6 +1,12 @@
 { pkgs, config, ... } :
 
 {
+	home.sessionVariables = {
+		TERMINAL = "alacritty";
+	};
+
+	home.packages = [ pkgs.alacritty ];
+  
   programs.alacritty = {
     enable = true;
     settings = {

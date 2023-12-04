@@ -142,7 +142,6 @@
     description = "angelo";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      alacritty
       wev
       chromium
       firefox-devedition
@@ -150,7 +149,6 @@
       lf
       pcmanfm
       swaynotificationcenter
-      hyprpaper
       starship
       nerdfonts
       fastfetch
@@ -170,12 +168,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
     wget
     xdg-user-dirs
     exfat
     git
-    gnumake
   ];
 
   programs.steam.enable = true;
@@ -215,6 +211,8 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  nix.optimise.automatic = true;
 
   # Reduce swappiness
   boot.kernel.sysctl = {

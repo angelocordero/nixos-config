@@ -21,7 +21,7 @@
 	},
         {
 	 "type": "terminal",
-	 "format": "{}"
+	 "format": "{3}"
 	},
 	{
           "type": "wm",

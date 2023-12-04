@@ -5,10 +5,10 @@
     nix-colors.homeManagerModules.default
     hyprland.homeManagerModules.default
   ] ++ [
-    ./dotfiles/alacritty.nix
+    #./dotfiles/alacritty.nix
+		./dotfiles/kitty.nix
     ./dotfiles/wofi.nix
     ./dotfiles/swappy.nix
-    ./dotfiles/hyprpaper.nix
     ./dotfiles/swaync.nix
     ./dotfiles/starship.nix
     ./dotfiles/fastfetch.nix
@@ -16,6 +16,9 @@
     ./dotfiles/waybar.nix
     ./dotfiles/btop-theme.nix
     ./dotfiles/spicetify.nix
+    ./dotfiles/mangohud.nix
+    ./dotfiles/swayosd.nix
+    ./dotfiles/neovim.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.rose-pine;
@@ -53,10 +56,13 @@
     monitor = HDMI-A-1, 1920x1080@60, 0x0, 1
     monitor = DP-3, 1920x1080@75, 1920x0, 1
 
-    exec-once = hyprpaper
+    exec-once = swww init
     exec-once = swaync
     exec-once = waybar
     exec-once = /home/angelo/.local/share/hyprload/hyprload.sh
+
+		exec = swww img -o HDMI-A-1 "$HOME/configs/dotfiles/assets/wallpapers/left.png"
+		exec = swww img -o DP-3 "$HOME/configs/dotfiles/assets/wallpapers/right.png"
 
     general {
       gaps_out = 10
@@ -80,7 +86,7 @@
     windowrulev2 = size 900 400, title:(volctrl)
     windowrulev2 = move 65 650, title:(volctrl)
 
-    bind = SUPER, RETURN, exec, alacritty
+    bind = SUPER, RETURN, exec, kitty -1
     bind = SUPER, D, exec, wofi --show drun
 
     bind = SUPER_SHIFT, Q, killactive 
@@ -94,6 +100,11 @@
     bind = SUPER_SHIFT, Down, movewindow, d
     bind = SUPER_SHIFT, Left, movewindow, l
     bind = SUPER_SHIFT, Right, movewindow, r
+
+    bind = SUPER_CONTROL, right, resizeactive, 10 0
+    bind = SUPER_CONTROL, left, resizeactive, -10 0
+    bind = SUPER_CONTROL, up, resizeactive, 0 -10
+    bind = SUPER_CONTROL, down, resizeactive, 0 10
 
     bindm = SUPER, mouse:272, movewindow
     bindm = SUPER, mouse:273, resizewindow
@@ -125,8 +136,9 @@
     bind = SUPER_SHIFT, Print, exec, my-screenshot-region
     bind = SUPER_CONTROL, Print, exec, my-screenshot-region-edit
 
-    bind = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+
-    bind = , XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%-
+    bind = , XF86AudioRaiseVolume, exec, swayosd --output-volume raise +3
+    bind = , XF86AudioLowerVolume, exec, swayosd --output-volume -3
+    bind = , Caps_Lock, exec, sleep .1 && swayosd --caps-lock
     '';
   };
 
@@ -155,6 +167,9 @@
     (import ./scripts/my-screenshot-region-edit.nix { inherit pkgs; })
     (import ./scripts/hyprland-scripts.nix { inherit pkgs; })
     (import ./scripts/volctrl.nix { inherit pkgs; })
+		(import ./scripts/wallpaper-script.nix { inherit pkgs; })
+
+		pkgs.swww
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -184,7 +199,6 @@
   #  /etc/profiles/per-user/angelo/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.

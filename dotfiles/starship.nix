@@ -1,4 +1,4 @@
-{ pkgs, config, ... } :
+{ pkgs, config, ... }:
 
 {
   programs.starship = {
@@ -11,11 +11,11 @@
       right_format = "$cmd_duration";
       continuation_prompt = "󱞩 ";
       cmd_duration = {
-	format = "took [$duration]($style)";
+        format = "took [$duration]($style)";
       };
       character = {
         success_symbol = "[󰁔](blue)";
-	error_symbol = "[](cyan)";
+        error_symbol = "[](cyan)";
       };
       git_branch = {
         format = " $branch";

@@ -1,39 +1,39 @@
-{ pkgs, config, ... } :
+{ pkgs, config, ... }:
 
 {
-	home.sessionVariables = {
-		TERMINAL = "alacritty";
-	};
+  home.sessionVariables = {
+    TERMINAL = "alacritty";
+  };
 
-	home.packages = [ pkgs.alacritty ];
-  
+  home.packages = [ pkgs.alacritty ];
+
   programs.alacritty = {
     enable = true;
     settings = {
       window = {
         padding = {
-	  x = 10;
-	  y = 10;
-	};
+          x = 10;
+          y = 10;
+        };
       };
       cursor.style.shape = "Beam";
       font = {
         normal = {
           family = "JetBrainsMono Nerd Font Mono";
-	  style = "Regular";
-	};
-	bold = {
+          style = "Regular";
+        };
+        bold = {
           family = "JetBrainsMono Nerd Font Mono";
-	  style = "Bold";
-	};
-	italic = {
+          style = "Bold";
+        };
+        italic = {
           family = "JetBrainsMono Nerd Font Mono";
-	  style = "Italic";
-	};
-	bold_italic = {
+          style = "Italic";
+        };
+        bold_italic = {
           family = "JetBrainsMono Nerd Font Mono";
-	  style = "Bold Italic";
-	};
+          style = "Bold Italic";
+        };
       };
       colors = with config.colorScheme.colors; {
         bright = {
@@ -67,10 +67,10 @@
       };
       key_bindings = [
         {
-	  key = "Return";
-	  mods = "Super|Shift";
-	  action = "SpawnNewInstance";
-	}
+          key = "Return";
+          mods = "Super|Shift";
+          action = "SpawnNewInstance";
+        }
       ];
     };
   };

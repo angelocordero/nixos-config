@@ -1,4 +1,4 @@
-{ pkgs, ... } : 
+{ pkgs, ... }:
 
 {
   programs.neovim = {
@@ -17,7 +17,7 @@
 
       hi MatchParen cterm=bold ctermbg=none ctermfg=red
       
-			:set guicursor=
+      :set guicursor=
     '';
   };
 

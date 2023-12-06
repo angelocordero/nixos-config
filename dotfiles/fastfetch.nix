@@ -1,46 +1,48 @@
 { pkgs, config, ... } : 
 
 {
+	home.packages = [ pkgs.fastfetch ];
+
   home.file.".config/fastfetch/config.jsonc".text = ''
     {
       "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
       "modules": [
         "title",
         "separator",
-	{
-	  "type": "os",
-	  "format": "{} {}"
-	},
+				{
+				  "type": "os",
+				  "format": "{} {}"
+				},
         "host",
         "kernel",
         "uptime",
         "packages",
-	{
-          "type": "shell",
-	  "format": "{}"
-	},
+				{
+					"type": "shell",
+	  			"format": "{}"
+				},
         {
-	 "type": "terminal",
-	 "format": "{3}"
-	},
-	{
+				 	"type": "terminal",
+				 	"format": "{3}"
+				},
+				{
           "type": "wm",
-	  "format": "{}"
-	},
-	{
-	  "type": "cpu",
-	  "format": "{}"
-	},
+	  			"format": "{}"
+				},
+				{
+				  "type": "cpu",
+				  "format": "{}"
+				},
         {
-	  "type": "gpu",
+	  			"type": "gpu",
           "forceVulkan": true,
-	  "format": "{2}"
-	},
+	  			"format": "{2}"
+				},
         "memory",
-	{
-	"type": "disk",
+				{
+				"type": "disk",
         "format": "{} / {} ({})"
-	},
+				},
         "break",
         "colors"
       ]

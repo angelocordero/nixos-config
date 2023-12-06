@@ -1,6 +1,8 @@
-{ pkgs, config, ... } :
+{ pkgs, config, ... }:
 
 {
+  home.packages = with pkgs; [ swaynotificationcenter playerctl ];
+
   home.file.".config/swaync/config.json".text = ''
     {
       "$schema": "/etc/xdg/swaync/configSchema.json",
@@ -33,15 +35,15 @@
       "script-fail-notify": true,
       "widgets": [
         "title",
-	"mpris",
+    	  "mpris",
         "dnd",
         "notifications"
       ],
       "widget-config": {
         "inhibitors": {
-          "text": "Inhibitors",
-	  "button-text": "Clear All",
-          "clear-all-button": true
+        "text": "Inhibitors",
+    	  "button-text": "Clear All",
+        "clear-all-button": true
         },
         "title": {
           "text": "Notification Center",
@@ -50,11 +52,11 @@
         },
         "dnd": {
           "text": "Do Not Disturb"
-	},
-	"mpris": {
-	  "image-size": 64,
-	  "image-radius": 5
-	}
+    	  },
+        "mpris": {
+    	    "image-size": 64,
+    	    "image-radius": 5
+    	  }
       }
     }
   '';

@@ -1,4 +1,4 @@
-{ config, ... } : 
+{ config, ... }:
 
 {
   home.file.".config/btop/themes/my-theme.theme".text = ''

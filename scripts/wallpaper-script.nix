@@ -26,7 +26,8 @@ pkgs.writeShellApplication {
 		convert "$image_path" -gravity East -crop 50%x100%+0+0 "''${wallpapers_folder}/right.png"
 		convert "$image_path" -gravity West -crop 50%x100%+0+0 "''${wallpapers_folder}/left.png"
 
-		hyprctl reload
+		swww img -o HDMI-A-1 "$HOME/configs/dotfiles/assets/wallpapers/left.png"
+		swww img -o DP-2 "$HOME/configs/dotfiles/assets/wallpapers/right.png"
 
 		echo "Success"
 	'';

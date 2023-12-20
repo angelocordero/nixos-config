@@ -53,6 +53,7 @@
         "clock" = {
           format = "{:%I\n%M\n%p}";
           tooltip-format = "<tt>{:%I:%M %p, %B %d, %Y}</tt>";
+					on-click = "eww open --toggle calendar";
         };
 
         "hyprland/workspaces" = {

@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+		android-nixpkgs = {
+			url = "github:tadfisher/android-nixpkgs";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
     hyprland.url = "github:hyprwm/Hyprland";
 
     nix-colors.url = "github:misterio77/nix-colors";
@@ -16,7 +21,7 @@
     spicetify-nix.url = "github:exellentcoin26/spicetify-nix";
   };
 
-  outputs = { self, ... } @inputs:
+  outputs = { self, android-nixpkgs,... } @inputs:
     let
       lib = inputs.nixpkgs.lib;
       system = "x86_64-linux";

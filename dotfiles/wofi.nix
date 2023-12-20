@@ -32,6 +32,8 @@
         border-radius: 3px;
         padding: 10px; 
 	      margin: 10px;
+				background-color:transparent;
+				color:transparent;
       }
 
       #entry {
@@ -46,6 +48,7 @@
 
       #text:selected {
        color: #${config.colorScheme.colors.base08};
+			 background-color: transparent;
       }
 	  '';
   };

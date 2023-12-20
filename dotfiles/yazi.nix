@@ -101,6 +101,7 @@
           { mime = "application/x-bzip2"; use = [ "extract" "reveal" ]; }
           { mime = "application/x-7z-compressed"; use = [ "extract" "reveal" ]; }
           { mime = "application/x-rar"; use = [ "extract" "reveal" ]; }
+					{ mime = "application/x-xz"; use = [ "extract" "reveal" ]; }
 
           { mime = "*"; use = [ "open" "reveal" ]; }
         ];

@@ -1,11 +1,12 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = with inputs; [
-    nix-colors.homeManagerModules.default
-  ] ++ [
+  imports = [
+#		inputs.hyprland.homeManagerModules.default
+    inputs.nix-colors.homeManagerModules.default
+		inputs.android-nixpkgs.hmModule
     ./dotfiles/hyprland.nix
-    #./dotfiles/alacritty.nix
+#   ./dotfiles/alacritty.nix
     ./dotfiles/kitty.nix
     ./dotfiles/wofi.nix
     ./dotfiles/swappy.nix
@@ -26,8 +27,22 @@
   # Colorscheme for (almost) the entire system
   colorScheme = inputs.nix-colors.colorSchemes.rose-pine;
 
+	gtk = {
+		enable = true;
+		cursorTheme = {
+			package = pkgs.comixcursors.White;
+			name = "ComixCursors-White";
+		};
+		theme = {
+			package = pkgs.rose-pine-gtk-theme;
+			name = "rose-pine";
+		};
+	};
+
   home.packages = with pkgs; [
-    nixpkgs-fmt
+		btop
+		nvtop-amd
+	  nixpkgs-fmt
     qimgv
     vlc
     arduino
@@ -36,20 +51,40 @@
     firefox-devedition
     libnotify
     vscodium-fhs
-    btop
     mangohud
     cliphist
     wl-clipboard
     wl-clip-persist
+		eww-wayland
+		discord
+		obs-studio
+		mpv
+		ninja
   ] ++ [
+    (import ./scripts/hyprland-workspace-script.nix { inherit pkgs; })
+    (import ./scripts/wallpaper-script.nix { inherit pkgs; })
     (import ./scripts/my-screenshot.nix { inherit pkgs; })
     (import ./scripts/my-screenshot-monitor.nix { inherit pkgs; })
     (import ./scripts/my-screenshot-region.nix { inherit pkgs; })
     (import ./scripts/my-screenshot-region-edit.nix { inherit pkgs; })
-    (import ./scripts/hyprland-scripts.nix { inherit pkgs; })
     (import ./scripts/volctrl.nix { inherit pkgs; })
-    (import ./scripts/wallpaper-script.nix { inherit pkgs; })
   ];
+
+	android-sdk = {
+		enable = true;
+		packages = sdk: with sdk; [
+      build-tools-34-0-0
+      cmdline-tools-latest
+      emulator
+      platforms-android-34
+      sources-android-34
+			platform-tools
+    ];
+	};
+
+	nixpkgs.overlays = [
+		inputs.android-nixpkgs.overlays.default
+	];
 
   programs.git = {
     enable = true;
@@ -59,6 +94,9 @@
       core = {
         branch = "main";
       };
+			safe = {
+				directory = "*";
+			};
     };
   };
 
@@ -67,10 +105,13 @@
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
+		CHROME_EXECUTABLE = "chromium";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+	nixpkgs.config.allowUnfree = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

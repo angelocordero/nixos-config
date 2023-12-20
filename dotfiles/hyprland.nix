@@ -1,15 +1,13 @@
 { pkgs, config, inputs, ... }:
 
 {
-  imports = [ inputs.hyprland.homeManagerModules.default ];
-
   home.packages = [ pkgs.hyprpicker ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = ''
     monitor = HDMI-A-1, 1920x1080@60, 0x0, 1
-    monitor = DP-3, 1920x1080@75, 1920x0, 1
+    monitor = DP-2, 1920x1080@75, 1920x0, 1
 
     exec-once = swww init
     exec-once = swaync
@@ -17,9 +15,11 @@
     exec-once = /home/angelo/.local/share/hyprload/hyprload.sh
 		exec-once = wl-paste --type text --watch cliphist store
 		exec-once = wl-paste --type image --watch cliphist store
+		exec-once = eww daemon
+		exec-once = hyprctl setcursor ComixCursors-White 24
 
-		exec = swww img -o HDMI-A-1 "$HOME/configs/dotfiles/assets/wallpapers/left.png"
-		exec = swww img -o DP-3 "$HOME/configs/dotfiles/assets/wallpapers/right.png"
+		exec = systemd-cat swww img -o HDMI-A-1 "$HOME/configs/dotfiles/assets/wallpapers/left.png"
+		exec = systemd-cat swww img -o DP-2 "$HOME/configs/dotfiles/assets/wallpapers/right.png"
 
     general {
       gaps_out = 10
@@ -30,7 +30,13 @@
 
     decoration {
       rounding = 5
-    }
+			blur {
+				enabled = true
+				size = 3
+				brightness = 1.0
+				contrast = 2.0
+			}
+   }
 
     plugin {
       split-monitor-workspaces {

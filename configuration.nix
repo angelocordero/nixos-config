@@ -29,7 +29,7 @@
   # WM
   nix.settings = {
     substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+		trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   programs.hyprland = {
@@ -106,11 +106,15 @@
 
   # Monitors
   boot.kernelParams = [
-    "video=DP-3:1920x1080@75"
+    "video=DP-2:1920x1080@75"
     "video=HDMI-A-1:1920x1080@60"
   ];
 
   programs.steam.enable = true;
+
+	# Virtualization
+	boot.kernelModules = [ "kvm-amd" ];
+	virtualisation.libvirtd.enable = true;
 
  # Hostname
   networking.hostName = "NixAorus"; # Define your hostname.
@@ -146,7 +150,7 @@
   users.users.angelo = {
     isNormalUser = true;
     description = "angelo";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
   };
 
   # Allow unfree packages
